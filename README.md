@@ -8,7 +8,6 @@ Installation
 1. Cloner le projet
    
    git clone <URL_DU_REPO>
-   cd VehicleStoreManagement
 
 2. Installer les dépendances PHP
    
