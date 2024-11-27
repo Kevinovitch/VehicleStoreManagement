@@ -1,0 +1,116 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau Véhicule{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="mb-0">Ajouter un nouveau véhicule</h2>
+                    </div>
+                    <div class="card-body">
+                        {{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form_row(form.marque, {
+                                    'label_attr': {'class': 'form-label'},
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.modele, {
+                                    'label_attr': {'class': 'form-label'},
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                {{ form_row(form.numeroImmatriculation, {
+                                    'label_attr': {'class': 'form-label'},
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form_row(form.dateImmatriculation, {
+                                    'label_attr': {'class': 'form-label'},
+                                    'attr': {'class': 'form-control'}
+                                }) }}
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            {{ form_row(form.proprietaire, {
+                                'label_attr': {'class': 'form-label'},
+                                'attr': {'class': 'form-select'}
+                            }) }}
+                        </div>
+
+                        <div class="caracteristiques-collection mb-3"
+                             data-prototype="{{ form_widget(form.caracteristiques.vars.prototype)|e('html_attr') }}">
+                            <h4>Caractéristiques</h4>
+                            {% for caracteristiqueForm in form.caracteristiques %}
+                                <div class="caracteristique-item mb-3">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            {{ form_row(caracteristiqueForm.nom) }}
+                                        </div>
+                                        <div class="col-md-5">
+                                            {{ form_row(caracteristiqueForm.valeur) }}
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button type="button" class="btn btn-danger remove-caracteristique">
+                                                Supprimer
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <button type="button" class="btn btn-info mb-3" id="add-caracteristique">
+                            Ajouter une caractéristique
+                        </button>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            <a href="{{ path('app_admin_dashboard') }}" class="btn btn-secondary">Retour</a>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addCaracteristiqueButton = document.getElementById('add-caracteristique');
+            const caracteristiquesContainer = document.querySelector('.caracteristiques-collection');
+            let index = caracteristiquesContainer.children.length;
+
+            addCaracteristiqueButton.addEventListener('click', function() {
+                const prototype = caracteristiquesContainer.dataset.prototype;
+                const newForm = prototype.replace(/__name__/g, index);
+                const div = document.createElement('div');
+                div.classList.add('caracteristique-item', 'mb-3');
+                div.innerHTML = newForm;
+                caracteristiquesContainer.appendChild(div);
+                index++;
+            });
+
+            caracteristiquesContainer.addEventListener('click', function(e) {
+                if (e.target.classList.contains('remove-caracteristique')) {
+                    e.target.closest('.caracteristique-item').remove();
+                }
+            });
+        });
+    </script>
+{% endblock %}
