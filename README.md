@@ -1,25 +1,19 @@
 Système de Gestion de Véhicules
 
 Application Symfony 7 permettant la gestion de véhicules et de leurs propriétaires.
-Prérequis
 
-PHP 8.2 ou supérieur
-Composer
-Node.js et npm
-MySQL/MariaDB
-Symfony CLI (optionnel mais recommandé)
 
 Installation
 
 1. Cloner le projet
-   bashCopygit clone <URL_DU_REPO>
+   git clone <URL_DU_REPO>
    cd VehicleStoreManagement
 
 2. Installer les dépendances PHP
-   bashCopycomposer install
+   composer install
 
 3. Installer les dépendances JavaScript
-   bashCopynpm install
+   npm install
    npm run build
 
 4. Configurer la base de données
@@ -54,6 +48,7 @@ php bin/console doctrine:fixtures:load
    Pour la production :
    
    npm run build
+
 7. Démarrer le serveur
    
    Avec Symfony CLI :
