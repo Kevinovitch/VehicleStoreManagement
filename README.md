@@ -20,7 +20,7 @@ Installation
 
 Copier le fichier .env en .env.local :
 
-bashCopycp .env .env.local
+cp .env .env.local
 
 Modifier la ligne DATABASE_URL dans .env.local avec vos informations :
 
