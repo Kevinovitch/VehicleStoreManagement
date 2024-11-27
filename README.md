@@ -6,6 +6,7 @@ Application Symfony 7 permettant la gestion de véhicules et de leurs propriéta
 Installation
 
 1. Cloner le projet
+   
    git clone <URL_DU_REPO>
    cd VehicleStoreManagement
 
