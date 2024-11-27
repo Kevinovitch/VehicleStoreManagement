@@ -10,10 +10,13 @@ Installation
    cd VehicleStoreManagement
 
 2. Installer les dépendances PHP
+   
    composer install
 
 3. Installer les dépendances JavaScript
+ 
    npm install
+   
    npm run build
 
 4. Configurer la base de données
